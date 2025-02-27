@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Include auth + notes + categories scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/notes.js" defer></script>
+    <script src="js/categories.js" defer></script>
+</head>
+<body>
+    <header>
+        <!-- Arrows to hide/show the header -->
+        <button id="header-hide-btn" class="arrow-btn">▲</button>
+        <button id="header-show-btn" class="arrow-btn" style="display:none;">▼</button>
+        
+        <!-- Hamburger for small screens -->
+        <button id="menu-toggle" class="hamburger">&#9776;</button>
+      
+        <!-- Container that holds the logo + nav -->
+        <div id="notes-nav-container">
+          <div id="logo-container">
+            <img src="images/note_logo.png" alt="Logo" id="logo">
+          </div>
+          <!-- Actual nav items -->
+          <nav id="notes-nav">
+            <button id="home-btn">Home</button>
+            <button id="logout-btn">Logout</button>
+            <button id="view-all-notes-btn">Open Notes</button>
+          </nav>
+        </div>
+
+        <!-- Popup listing all notes -->
+        <div id="notes-popup" style="display: none">
+            <h2>Your Notes</h2>
+            <p>Click on the note you'd like to open.</p>
+            <p id="open-note-warning">Make sure to save your current progress!</p>
+            <div id="notes-container"></div>
+            <button id="close-popup-btn">Close</button>
+        </div>
+    </header>
+
+    <main id="notes-main">
+        <div id="notes-header">
+            <h1 id="note-title" contenteditable="true">Untitled Note</h1>
+            <div id="new-note-container">
+                <button id="new-note-btn">+</button>
+                <span id="new-note-tooltip">
+                    Create new note (Make sure to save current progress!)
+                </span>
+            </div>
+        </div>
+
+        <!-- Category / Tag management -->
+        <div id="categories-container">
+            <div id="selected-tags"></div>
+            <p id="add-category" contenteditable="true">Create Tag</p>
+            <button id="confirm-category-btn" style="display: none">&#10004;</button>
+            <select id="category-select">
+                <option value="">Select a tag</option>
+            </select>
+
+            <!-- Manage tags popup -->
+            <button id="manage-categories-btn" class="gear-icon">⚙️</button>
+        </div>
+
+        <div id="manage-categories-popup" style="display: none">
+            <h2>Manage Tags</h2>
+            <ul id="manage-categories-list"></ul>
+            <button id="close-manage-categories-popup">Close</button>
+        </div>
+
+        <!-- Note text editor -->
+        <textarea id="note-editor" placeholder="Start writing your note here..."></textarea>
+
+        <!-- Save / Delete / Clone buttons -->
+        <div id="note-btns">
+            <button id="save-note-btn">Save Note</button>
+            <button id="delete-note-btn" style="display: none;">Delete Note</button>
+            <button id="clone-note-btn" style="display: none;">Clone Note</button>
+        </div>
+    </main>
+</body>
+</html>

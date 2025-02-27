@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Note Taking App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Link to main stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Auth + index logic -->
+    <script src="js/auth.js"></script>
+    <script src="js/index.js" defer></script>
+</head>
+<body>
+    <header id="home-header">
+        <!-- Logo container -->
+        <div id="logo-container">
+            <img src="images/note_logo.png" alt="Logo" id="logo">
+        </div>
+        <h1 id="home-title">Note Taker 3000</h1>
+        
+        <!-- Hamburger menu for small screens -->
+        <button id="menu-toggle" class="hamburger">&#9776;</button>
+
+        <!-- Main nav (toggles active on small screens) -->
+        <nav id="home-nav">
+            <button id="login-btn" style="display: none">Login</button>
+            <button id="register-btn" style="display: none">Register</button>
+            <button id="logout-btn" style="display: none;">Logout</button>
+            <div id="welcome-container">
+                <p id="welcome-msg" style="display: none;">Welcome!</p>
+                <p id="not-you-msg" style="display: none;">&larr; Not you?</p>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home-main">
+            <h2>Take notes, organize your thoughts, and never forget a thing!</h2>
+            <p>Sign up or log in to get started.</p>
+        </section>
+
+        <!-- Button to go to the notes page (only shows if user is logged in) -->
+        <nav id="go-to-notes-nav">
+            <a href="notes.html" id="my-notes-btn" style="display: none;">My Notes</a>
+        </nav>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Note Taking App</p>
+    </footer>
+</body>
+</html>
