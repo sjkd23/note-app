@@ -1,12 +1,9 @@
-Below is a **sample** README you can use as a starting template. Feel free to adjust the wording, add your personal insights, or remove any sections that aren’t relevant. The goal is to create a **modern** and **industry-standard** README that meets the bootcamp’s criteria.
-
----
-
 # Note-Taking App
 
 A full-stack Note-Taking application using Node.js, Express, MongoDB, and a client-side interface with HTML/CSS/JavaScript. Each user can register, log in, and manage their own notes—including categories/tags for organizing notes better.
 
 ## Table of Contents
+
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
@@ -20,13 +17,12 @@ A full-stack Note-Taking application using Node.js, Express, MongoDB, and a clie
   - [Managing Notes](#managing-notes)
   - [Managing Categories](#managing-categories)
 - [Running Tests](#running-tests)
-- [What I Learned](#what-i-learned)
-- [Additional Notes](#additional-notes)
 - [License](#license)
 
 ---
 
 ## Features
+
 - **User Authentication**: Create an account, log in, and manage personal note collections.
 - **Create / Read / Update / Delete (CRUD)**: Users can add new notes, update them, clone them, or delete them.
 - **Categories (Tags)**: Each note can be associated with multiple categories, making organization easy.
@@ -36,6 +32,7 @@ A full-stack Note-Taking application using Node.js, Express, MongoDB, and a clie
 ---
 
 ## Tech Stack
+
 1. **Node.js** + **Express**: Back-end server and routing.  
 2. **MongoDB** (with Mongoose): For data persistence.  
 3. **HTML/CSS/JavaScript**: Front-end user interface.  
@@ -46,7 +43,8 @@ A full-stack Note-Taking application using Node.js, Express, MongoDB, and a clie
 ---
 
 ## Project Structure
-```
+
+```bash
 note-taking-app/                         
 ├── README.md                            # Project documentation
 ├── client                               # Front-end files
@@ -98,13 +96,15 @@ note-taking-app/
 ## Setup and Installation
 
 ### Prerequisites
+
 1. **Node.js** (v14 or later recommended)  
 2. **MongoDB** installed locally or an online MongoDB service (e.g., MongoDB Atlas).
 
 ### Environment Variables
+
 Create a `.env` file (in the project root) with the following keys:
 
-```
+```bash
 MONGO_URI=<YourMongoURI>
 JWT_SECRET=<YourSecretKey>
 JWT_EXPIRES_IN=1h
@@ -120,37 +120,60 @@ TEST_MONGO_URI=<YourMongoURIForTests>
 - `TEST_MONGO_URI`: A separate database for running tests (only required if running tests).
 
 ### Installation Steps
+
 1. **Clone** the repository:
+
    ```bash
    git clone https://github.com/sjkd23/note-app.git
    ```
+
 2. **Navigate** to the project folder:
+
    ```bash
    cd note-taking-app
    ```
+
 3. **Navigate** to the server folder:
+
    ```bash
    cd server
    ```
+
 4. **Install** dependencies:
+
    ```bash
    npm install
    ```
+
 5. **Create** your `.env` file as described above.
 6. **Start** the server:
+
    ```bash
    npm start
    ```
-7. **Open** the front-end in your browser:
+
+7. **Set** your front-end API URL in `client/public/js/config.js`:
+
+   ```js
+   // config.js
+   const CONFIG = {
+     API_URL: "http://localhost:5000"  // or your deployed server URL
+   };
+   ```
+
+8. **Open** the front-end in your browser:
   Open index.html in your browser (located in client/public)
 
 ---
 
 ## API Documentation
+
 If you have **Swagger** set up, you can open:
-```
+
+```bash
 GET /api-docs
 ```
+
 to see the interactive docs. Otherwise, you can check the routes below:
 
 - **Auth**  
@@ -176,10 +199,12 @@ These endpoints require a valid JWT in the `Authorization` header (except for `/
 ## Usage Guide
 
 ### Register / Login
+
 1. **Register** a new user at `POST /api/auth/register` with `{ username, email, password }`.
 2. **Login** at `POST /api/auth/login` with `{ email, password }`. On success, you’ll get a JWT `token`.
 
 ### Managing Notes
+
 - **Create** a note: `POST /api/notes` with `{ title, content, categories (optional) }`.
 - **View** all notes: `GET /api/notes`.
 - **Update** a note: `PUT /api/notes/:id`.
@@ -187,6 +212,7 @@ These endpoints require a valid JWT in the `Authorization` header (except for `/
 - **Clone**: You can also clone a note from the front-end UI if implemented.
 
 ### Managing Categories
+
 - **Create** a category: `POST /api/notes/categories` with `{ name }`.
 - **View** all categories: `GET /api/notes/categories`.
 - **Update** a category: `PUT /api/notes/categories/:id`.
@@ -195,35 +221,21 @@ These endpoints require a valid JWT in the `Authorization` header (except for `/
 ---
 
 ## Running Tests
+
 - **Unit/Integration tests** use [Jest](https://jestjs.io/) + [Supertest](https://github.com/ladjs/supertest).
 - Ensure your `.env` includes `TEST_MONGO_URI`.
 - Then run:
+
   ```bash
   npm test
   ```
+
 - This will spin up a test environment, connect to `TEST_MONGO_URI`, and run the controllers’ tests.
 
 ---
 
-## What I Learned
-- **Express.js Routing** and structuring a Node.js app into distinct controllers and routes.
-- **User Authentication** with JWT tokens, localStorage usage on the front-end, and verifying ownership on the back-end.
-- **MongoDB** data modeling with Mongoose (schemas, references, pre-save hooks for unique note titles).
-- **CRUD** operations: designing and testing endpoints with [Supertest](https://github.com/visionmedia/supertest).
-- **Front-End** integration: a simple but responsive interface using HTML/CSS/JavaScript, plus media queries for smaller screens.
-
----
-
-## Additional Notes
-- The project is **not** locked behind a session-based approach; it’s token-based.  
-- For a more robust production deployment, you might consider environment-based config management, advanced logging, and input sanitization.  
-- Keep your **JWT_SECRET** private and rotate it periodically if this were a real production app.
-
----
-
 ## License
+
 This project is licensed under the **MIT License**—feel free to modify or distribute. Check the `LICENSE` file (if you create one) for full details.
 
 ---
-
-**Enjoy your note-taking!** If you have any questions or run into issues, feel free to open an issue on the repository or reach out.
