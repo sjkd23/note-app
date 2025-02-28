@@ -357,6 +357,12 @@ header.collapsed #menu-toggle {
     color: #555;
 }
 
+.note-tags-line {
+    font-style: italic;
+    margin-top: 4px;
+  }
+  
+
 /* Close popup button */
 #close-popup-btn {
     background-color: red;

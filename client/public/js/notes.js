@@ -7,7 +7,8 @@
  *  - Toggling the header and hamburger menu
  */
 
-const NOTES_API_URL = "http://localhost:5000/api/notes"; 
+const NOTES_API_URL = CONFIG.API_URL + "/api/notes";
+
 let activeNoteId = null; // Currently opened note _id
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -116,9 +117,12 @@ function createNewNote() {
 
 /**
  * Load all notes for the user, then populate the notes popup
+ * with each note’s categories.
  */
 async function loadNotes() {
   try {
+    const categoriesMap = await fetchCategoriesMap();
+
     const response = await fetch(NOTES_API_URL, {
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -131,7 +135,7 @@ async function loadNotes() {
     notesContainer.innerHTML = "";
 
     if (data.notes.length === 0) {
-      // If no notes exist, show a message
+
       const noNotesMessage = document.createElement("p");
       noNotesMessage.textContent = "No notes yet!";
       noNotesMessage.style.fontSize = "18px";
@@ -141,24 +145,34 @@ async function loadNotes() {
       return;
     }
 
-    // For each note, create a "card" with title & preview
     data.notes.forEach(note => {
       const noteCard = document.createElement("div");
       noteCard.classList.add("note-card");
 
+      // Note title
       const noteTitleEl = document.createElement("h3");
       noteTitleEl.textContent = note.title || "Untitled Note";
 
+      // Note preview (first 100 chars)
       const notePreview = document.createElement("p");
-      notePreview.textContent = 
+      notePreview.textContent =
         note.content.length > 100
           ? note.content.slice(0, 100) + "..."
           : note.content;
 
+      // Map each categoryId to its name in the categoriesMap, then join by comma
+      const catIds = note.categories || [];
+      const catNames = catIds.map(cid => categoriesMap[cid] || "Unknown Tag");
+      const noteCategoriesEl = document.createElement("p");
+      noteCategoriesEl.classList.add("note-tags-line");
+      noteCategoriesEl.textContent = "Tags: " + (catNames.length ? catNames.join(", ") : "None");
+
+      // Append elements to the card
       noteCard.appendChild(noteTitleEl);
       noteCard.appendChild(notePreview);
+      noteCard.appendChild(noteCategoriesEl);
 
-      // Clicking on a note in the popup -> open that note
+      // Clicking a note in the popup -> open it
       noteCard.addEventListener("click", () => {
         openNote(note._id);
         closeNotesPopup();
@@ -365,5 +379,33 @@ async function cloneCurrentNote() {
   } catch (error) {
     console.error("Error cloning note:", error);
     alert("Failed to clone note.");
+  }
+}
+
+/**
+ * Helper function: Fetch all categories, return them as a Map of
+ * { categoryId: categoryName }
+ */
+async function fetchCategoriesMap() {
+  try {
+    const resp = await fetch(CATEGORIES_API_URL, {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+    if (!resp.ok) {
+      throw new Error("Failed to load categories for map");
+    }
+    const { categories } = await resp.json();
+
+    // Build a map: { "catId": "catName" }
+    const map = {};
+    categories.forEach(cat => {
+      map[cat._id] = cat.name;
+    });
+    return map;
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return {}; // Return empty map on failure
   }
 }

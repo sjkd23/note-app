@@ -106,40 +106,43 @@ Create a `.env` file (in the project root) with the following keys:
 
 ```
 MONGO_URI=<YourMongoURI>
-TEST_MONGO_URI=<YourMongoURIForTests>
 JWT_SECRET=<YourSecretKey>
 JWT_EXPIRES_IN=1h
 NODE_ENV=development
 PORT=5000
+TEST_MONGO_URI=<YourMongoURIForTests>
 ```
 
 - `MONGO_URI`: The connection string for your MongoDB database.
-- `TEST_MONGO_URI`: A separate database for running tests (optional but recommended).
 - `JWT_SECRET`: A random secret key used for JWT signing.
 - `JWT_EXPIRES_IN`: Token expiration, e.g. `"1h"` or `"2d"`.
 - `PORT`: The port the server runs on (default 5000).
+- `TEST_MONGO_URI`: A separate database for running tests (only required if running tests).
 
 ### Installation Steps
 1. **Clone** the repository:
    ```bash
-   git clone https://github.com/YourUserName/note-taking-app.git
+   git clone https://github.com/sjkd23/note-app.git
    ```
 2. **Navigate** to the project folder:
    ```bash
    cd note-taking-app
    ```
-3. **Install** dependencies:
+3. **Navigate** to the server folder:
+   ```bash
+   cd server
+   ```
+4. **Install** dependencies:
    ```bash
    npm install
    ```
-4. **Create** your `.env` file as described above.
-5. **Start** the server:
+5. **Create** your `.env` file as described above.
+6. **Start** the server:
    ```bash
    npm start
    ```
-6. **Open** the front-end in your browser:
-   - By default, the project serves static files from `client/public` or similar. 
-   - Or open [`http://localhost:5000`](http://localhost:5000) (depending on how you structured your front-end).
+7. **Open** the front-end in your browser:
+  Open index.html in your browser (located in client/public)
 
 ---
 

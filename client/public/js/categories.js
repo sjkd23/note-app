@@ -3,7 +3,8 @@
  * Manages creating, listing, and deleting categories (tags).
  */
 
-const CATEGORIES_API_URL = "http://localhost:5000/api/notes/categories";
+const CATEGORIES_API_URL = CONFIG.API_URL + "/api/notes/categories";
+
 // This array stores category IDs selected for the current note
 let selectedCategories = [];
 

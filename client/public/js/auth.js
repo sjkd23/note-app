@@ -3,7 +3,7 @@
  * Common auth helper functions (checkAuth, logout) and constants for Auth API URL.
  */
 
-const AUTH_API_URL = "http://localhost:5000/api/auth";
+const AUTH_API_URL = CONFIG.API_URL + "/api/auth";
 
 /**
  * Checks if the user is currently authenticated by verifying the token in localStorage.
