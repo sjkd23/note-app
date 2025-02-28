@@ -28,6 +28,7 @@ A full-stack Note-Taking application using Node.js, Express, MongoDB, and a clie
 - **Categories (Tags)**: Each note can be associated with multiple categories, making organization easy.
 - **Responsive Front-End**: A simple, user-friendly interface that adapts to different screen sizes (desktop and mobile).
 - **RESTful API**: All note operations are exposed via clean RESTful endpoints secured by JWT tokens.
+- **Error Handling**: Ensures proper data is being given to the database, sending error codes when relevant.
 
 ---
 
